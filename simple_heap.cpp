@@ -20,12 +20,10 @@ int main()
     int tmp;
     int *heap;
     heap = new int(size);
-    rep(i, size) heap[i] = -99999;
     rep(i, size)
     {
         cin >> tmp;
         isleaf = false;
-        // if(i==0)heap[0]=tmp;
         heap[i] = tmp;
         if (i != 0)
         {
