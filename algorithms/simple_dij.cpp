@@ -67,9 +67,7 @@ int dij(vector<vector<int> > &graph, int link, int n, int src, int dst)
             min=dist[i];
             min_ind = i;
         }
-    
     }
-
     chk[min_ind]=1;
     int tmp_node;
     tmp_node=min_ind;
