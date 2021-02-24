@@ -8,7 +8,6 @@ using namespace std;
 // 2.葉をのぞき二つのノードを持つ。
 // 3.葉は左詰め。
 // 4.親は子より必ず大きな値をとる。
-
 int main()
 {
     bool isleaf;
