@@ -3,13 +3,13 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < n; ++i)
 #define MAX 9999
+
 // 有向グラフならtrue、無向グラフならfalseに
 #define DIRECTED 1
 // ダイクストラアルゴリズム
 // スタートノードsとノードiの距離をdist[i]
 // ノードiの状態　chk[i](0 or 1)
 // ノードiの前のノードpath[i]
-
 // 入力形式は (有向ならa->b)　ノードの番号は1-n;
 // ノード数　リンク数(辺)
 // a　b　距離　　＊リンクの個数
