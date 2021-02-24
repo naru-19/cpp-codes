@@ -1,11 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, n) for (int i = 0; i < n; ++i)
-
-
 // 2入力の最大公約数を求める
-
-
 int euclidean(int n,int m);
 int main(){
     int n,m;
