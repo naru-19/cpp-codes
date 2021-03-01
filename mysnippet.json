@@ -1,0 +1,61 @@
+{
+    "Print to console": {
+    	"prefix": "zlog",
+    	"body": [
+    		"console.log('$1');",
+    		"$2"
+    	],
+    	"description": "Log output to console"
+    },
+    "repin": {
+        "prefix": [
+            "zrep",
+            "rep("
+        ],
+        "body": [
+            "rep(i,n){$1}"
+        ]
+    },
+    "defloop": {
+        "prefix": "defloop",
+        "body": [
+            "#define rep(i,n) for(int i=0;i<n;i++)"
+        ]
+    },
+    "cout": {
+        "prefix": "zcout",
+        "body": "cout<<$1"
+    },
+    "inclu": {
+        "prefix": "zinclude",
+        "body": [
+            "#include <bits/stdc++.h>",
+            "using namespace std;",
+            "#define rep(i, n) for (int i = 0; i < n; ++i)",
+            "using ll = long long;",
+            "#define DEBUG_ON",
+            "",
+            "int main(){$1}"
+        ]
+    },
+    "cin": {
+        "prefix": "zcin",
+        "body": "cin>>$1"
+    },
+    "ret0": {
+        "prefix": "zret",
+        "body": "return 0;"
+    },
+    "endl": {
+        "prefix": "zendl",
+        "body": "<<endl;"
+    },
+    "ifndef": {
+        "prefix": "zifn",
+        "body": [
+            "#ifndef DEBUG_ON",
+            "$1",
+            "endif"
+        ]
+    }
+}
