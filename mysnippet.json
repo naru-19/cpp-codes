@@ -55,7 +55,7 @@
         "body": [
             "#ifndef DEBUG_ON",
             "$1",
-            "endif"
+            "#endif"
         ]
     }
 }
