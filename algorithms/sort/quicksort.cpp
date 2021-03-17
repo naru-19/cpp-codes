@@ -55,10 +55,13 @@ int main()
     rep(i,n){
         cin>>num.at(i);
     }
+    clock_t start = clock();
     quick_sort(num,0,n-1);
+    clock_t end = clock();
     cout<<"sorted: ";
     rep(i,n){
         cout<<num.at(i)<<" ";
     }
     cout<<""<<endl;
+    cout<<"time: "<<end-start<<"[ms]"<<endl;
 }

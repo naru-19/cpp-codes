@@ -1,19 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < n; ++i)
+#define rep(i, n) for (ll i = 0; i < n; ++i)
+#define Sort(a) sort(a.begin(),a.end())
+using ll = long long;
+
+#define DEBUG_ON
 
 //  (ex)
 // 5 4 3 2 1 0 → l(5,4,3),r(2 1 0)
 // 5 4 2 →　l(5),r(4 3) 4 3→l(4),r(3) →merge l(5) r(3 4)→merge l(3 4 5)
 // 2 1 0 も同様の処理
 
-void merge(vector<int> &a, int l, int mid, int r)
+void merge(vector<ll> &a, ll l, ll mid, ll r)
 {
     // l()とr()をくっつけてソートする。
-    int i, j; //lとrの中身の様子
+    ll i, j; //lとrの中身の様子
 
-    int k; //bがどこまでうまったか
-    vector<int> b(r - l + 1);
+    ll k; //bがどこまでうまったか
+    vector<ll> b(r - l + 1);
 
     //初期値
     i = l;
@@ -51,8 +55,8 @@ void merge(vector<int> &a, int l, int mid, int r)
 }
 
 // まず分割して整列
-void merge_sort(vector<int> &a, int l, int r){   
-    int mid;
+void merge_sort(vector<ll> &a, ll l, ll r){   
+    ll mid;
     if (l == r)
         return;
     mid = (l + r) / 2;
@@ -63,18 +67,21 @@ void merge_sort(vector<int> &a, int l, int r){
 
 int main(){
     cout<<"input size >";
-    int n;
+    ll n;
     cin >>n;
-    vector<int> a(n);
+    vector<ll> a(n);
     cout<<"input nums >";
     rep(i,n){
         cin>>a.at(i);
     }
+    clock_t start = clock();
     merge_sort(a ,0,n-1);
+    clock_t end = clock();
     cout<<"sorted"<<endl;
     rep(i, n)
     {
         cout << a.at(i)<<" ";
     }
     cout<<""<<endl;
+    cout<<"time: "<<end-start<<"[ms]" <<endl;
 }
