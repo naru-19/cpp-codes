@@ -47,6 +47,7 @@ int main()
     }
 
     rep(i,n){
+        // 各重さ時の最大価値を順々に求めていくイメージ
         rep(j,w+1){
             if(j-w_v.at(i).at(0)>=0){
                 chmax(dp.at(i+1).at(j),dp.at(i).at(j-w_v.at(i).at(0))+w_v.at(i).at(1));
