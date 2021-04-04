@@ -6,6 +6,7 @@ using ll = long long;
 
 #define DEBUG_ON
 
+// 隣のブロックとの差を見る
 ll compare_adjacent(ll tmp,ll adjacent,ll &flag){
     if(tmp>adjacent)return 0;
     if(adjacent-tmp>1){
@@ -17,6 +18,40 @@ ll compare_adjacent(ll tmp,ll adjacent,ll &flag){
     }
 }
 
+void box_update(vector<ll>&box,ll &flag,ll i,ll j,ll r,ll c){
+    ll tmp=i*c+j;
+    vector<ll>adjacent(4);
+    // 端っこの辺に注意
+    if(j+1<c){
+        adjacent[0]=i*c+j+1;
+    }
+    else{
+        adjacent[0]=i*c+j;
+    }
+    if(j-1>=0){
+        adjacent[1]=i*c+j-1;
+    }
+    else{
+        adjacent[1]=i*c+j;
+    }
+    if(i+1<r){
+        adjacent[2]=(i+1)*c+j;
+    }
+    else{
+        adjacent[2]=i*c+j;
+    }
+    if(i-1>=0){
+        adjacent[3]=(i-1)*c+j;
+    }
+    else{
+        adjacent[3]=i*c+j;
+    }
+    rep(k,4){
+        if(adjacent[k]<r*c&&adjacent[k]>=0){
+            box[tmp]+=compare_adjacent(box[tmp],box[adjacent[k]],flag);
+        }
+    }
+}
 
 ll addbox(vector<ll>& box,ll r,ll c,ll &flag){
     ll ans=0;
@@ -25,97 +60,8 @@ ll addbox(vector<ll>& box,ll r,ll c,ll &flag){
     ll _box=0;
     rep(i,r)rep(j,c){
         _box=box[i*c+j];
-        // cout<<box[i*c+j] <<endl;
-        if(i==0){
-            if(j==0){
-                adjacent=j+1;   
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent =(i+1)*c+j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j] += compare_adjacent(box[i*c+j],box[adjacent],flag);
-                ans+=box[i*c+j]-_box;
-                //cout << "i:" << i << "j:" << j << "ans:" << ans << endl;
-            }
-            else if(j==c-1){
-                adjacent=j-1;   
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent =(i+1)*c+j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                ans += box[i * c + j] - _box;
-                //cout << "i:" << i << "j:" << j << "ans:" << ans << endl;
-            }
-            else{
-                adjacent = j-1;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent=j+1;   
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent =(i+1)*c+j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                ans += box[i * c + j] - _box;
-                //cout << "i:" << i << "j:" << j << "ans:" << ans << endl;
-            }
-        }
-        else if(i==r-1){
-            if(j==0){
-                adjacent=i*c+j+1;   
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent =(i-1)*c+j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                ans += box[i * c + j] - _box;
-                //cout << "i:" << i << "j:" << j << "ans:" << ans << endl;
-            }
-            else if(j==c-1){
-                adjacent=i*c+j-1;   
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent =(i-1)*c+j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                ans += box[i * c + j] - _box;
-                //cout << "i:" << i << "j:" << j << "ans:" << ans << endl;
-            }
-            else{
-                adjacent =i*c+j-1;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent=i*c+j+1;   
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent =(i-1)*c+j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                ans += box[i * c + j] - _box;
-                //cout << "i:" << i << "j:" << j << "ans:" << ans << endl;
-            }
-        }
-        else{
-            if(j==0){
-                adjacent=i*c+j+1;   
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent =(i+1)*c+j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent =(i-1)*c+j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                ans += box[i * c + j] - _box;
-                //cout << "i:" << i << "j:" << j << "ans:" << ans << endl;
-            }
-            else if(j==c-1){
-                adjacent=i*c+j-1;   
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent =(i+1)*c+j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent = (i - 1) * c + j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                ans += box[i * c + j] - _box;
-                //cout << "i:" << i << "j:" << j << "ans:" << ans << endl;
-            }
-            else{
-                adjacent =i*c+j-1;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent=i*c+j+1;   
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent =(i+1)*c+j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                adjacent = (i - 1) * c + j;
-                if (adjacent < r * c && adjacent >= 0)box[i*c+j]+=compare_adjacent(box[i*c+j],box[adjacent],flag);
-                ans += box[i * c + j] - _box;
-                //cout << "i:" << i << "j:" << j << "ans:" << ans << endl;
-            }
-        }
+        box_update(box,flag,i,j,r,c);
+        ans+=box[i*c+j]-_box;
     }
     return ans;
 }
