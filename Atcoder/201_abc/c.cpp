@@ -34,12 +34,8 @@ int main()
     ll c=0;
     ll d=0;
     rep(i,10){
-        if (s.compare(i, 1, "o")==0){
-            c++;
-        }
-        else if(s.compare(i, 1, "?")==0){
-            d++;
-        }
+        if (s.compare(i, 1, "o")==0)c++;
+        else if(s.compare(i, 1, "?")==0)d++;
     }
     if(c==4){
         cout<<4*3*2*1;
@@ -54,48 +50,20 @@ int main()
     }
     else if(c==2){
         ans+=14;
-        if(d==1){
-            ans+=36;
-        }
-        else if(d>=2){
-            ans+=36*d;
-            ans+=d*(d-1)/2*24;
-        }
+        ans+=36*d;
+        ans+=d*(d-1)/2*24;
     }
     else if(c==1){
         ans+=1;
-        if(d==1){
-            ans+=14;
-        }
-        else if(d==2){
-            ans+=14*2;
-            ans+=36*d*(d-1)/2;
-        }
-        else if(d>=3){
-            ans+=14*d;
-            ans+=36*d*(d-1)/2;
-            ans+=24*d*(d-1)*(d-2)/6;
-        }
+        ans+=14*d;
+        ans+=36*d*(d-1)/2;
+        ans+=24*d*(d-1)*(d-2)/6;
     }
     else if(c==0){
-        if(d==1){
-            ans+=1;
-        }
-        else if(d==2){
-            ans+=2;
-            ans+=14;
-        }
-        else if(d==3){
-            ans+=3;
-            ans+=3*14;
-            ans+=36;
-        }
-        else{
-            ans+=d;
-            ans+=d*(d-1)*14/2;
-            ans+=d*(d-1)*(d-2)/6*36;
-            ans+=d*(d-1)*(d-2)*(d-3);
-        }
+        ans+=d;
+        ans+=d*(d-1)*14/2;
+        ans+=d*(d-1)*(d-2)/6*36;
+        ans+=d*(d-1)*(d-2)*(d-3);
     }
     cout<<ans;
 }
